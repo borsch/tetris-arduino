@@ -1,0 +1,9 @@
+*.sdf
+*.opensdf
+*.vcproj.user
+[Dd]ebug
+[Rr]elease
+build
+ipch
+*.db
+.vs/
