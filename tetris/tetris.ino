@@ -38,5 +38,5 @@ void loop()
 
 	game.draw();
 
-	delay(500);
+	delay(300);
 }

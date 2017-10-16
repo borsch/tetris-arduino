@@ -40,6 +40,8 @@ void Game::update()
 		movableToStatic();
 		generateShape();
 	}
+
+	checkFilledRow();
 }
 
 void Game::shapeToLeft()
@@ -225,6 +227,100 @@ void Game::printCell(int i, int j)
 	Serial.println(_cells[i][j].value);
 }
 
+void Game::checkFilledRow() 
+{
+	bool moveStaticBricksDown = false;
+	for (int i = GAME_FIELD_HEIGHT - 1; i >= 0; --i)
+	{
+		if (isRowFilledWith(i, STATIC_CELL)) {
+			for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
+			{
+				_cells[i][j].value = EMPLTY_CELL;
+				draw();
+				delay(50);
+			}
 
+			moveStaticBricksDown = true;
+		}
+	}
+
+	// move down static bricks
+
+	if (moveStaticBricksDown) {
+		//printBoard();
+
+		int emptyRows;
+		for (int i = GAME_FIELD_HEIGHT - 1; i >= 0; --i)
+		{
+			if (isRowFilledWith(i, EMPLTY_CELL))
+			{
+				emptyRows = 0;
+
+				for (int j = i; j >= 0; --j)
+				{
+					// count number of empty rows from the bottom
+					if (isRowFilledWith(j, EMPLTY_CELL))
+					{
+						++emptyRows;
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				if (emptyRows > 0)
+				{
+					/*Serial.print("for row ");
+					Serial.print(i);
+					Serial.print(" move down from row ");
+					Serial.println(i - emptyRows);
+
+					Serial.println("board before");
+					printBoard();*/
+
+					for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
+					{
+						if (_cells[i - emptyRows][j].value == STATIC_CELL)
+						{
+							_cells[i][j].value = _cells[i - emptyRows][j].value;
+							_cells[i - emptyRows][j].value = EMPLTY_CELL;
+						}
+					}
+
+					//draw();
+
+					//Serial.println("board after");
+				}
+			}
+		}
+	}
+}
+
+bool Game::isRowFilledWith(int row, int value)
+{
+	for (int i = 0; i < GAME_FIELD_WIDTH; ++i)
+	{
+		if (_cells[row][i].value != value)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void Game::printBoard()
+{
+	for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
+	{
+		Serial.println();
+		for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
+		{
+			Serial.print(_cells[i][j].value);
+		}
+	}
+	Serial.println();
+}
 
 #pragma endregion

@@ -6,8 +6,8 @@
 #define RECT_SIZE 5
 
 #define GAME_FIELD_HEIGHT 20
-#define GAME_FIELD_WIDTH 9
-#define SCREEN_RIGHT_OFFSET 17
+#define GAME_FIELD_WIDTH 8
+#define SCREEN_RIGHT_OFFSET 22
 #define SCREEN_TOP_OFFSET 25
 
 // cells that contains shape that are moving at this very momment
@@ -46,7 +46,11 @@ private:
 	*/
 	void movableToStatic();
 
+	void checkFilledRow();
+	bool isRowFilledWith(int row, int value);
+
 	void printCell(int i, int j);
+	void printBoard();
 public:
 	Game();
 
