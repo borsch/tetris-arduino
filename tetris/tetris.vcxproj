@@ -82,11 +82,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="__vm\.tetris.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
