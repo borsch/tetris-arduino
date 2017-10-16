@@ -17,9 +17,11 @@
 #define STATIC_CELL 1
 #define EMPLTY_CELL 0
 
+typedef unsigned int uint;
+
 struct Cell
 {
-	int value : 2;
+	uint value : 2;
 };
 
 class Game

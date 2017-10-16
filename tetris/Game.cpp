@@ -27,7 +27,7 @@ void Game::update()
 		{
 			for (int j = GAME_FIELD_WIDTH - 1; j >= 0; --j)
 			{
-				if (abs(_cells[i][j].value) == abs(MOVABLE_CELL))
+				if (_cells[i][j].value == MOVABLE_CELL)
 				{
 					_cells[i][j].value = EMPLTY_CELL;
 					_cells[i + 1][j].value = MOVABLE_CELL;
@@ -62,7 +62,7 @@ void Game::draw()
 	{
 		for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
 		{
-			if (abs(_cells[i][j].value) != abs(EMPLTY_CELL))
+			if (_cells[i][j].value != EMPLTY_CELL)
 			{
 				int x = i * RECT_SIZE + SCREEN_TOP_OFFSET;
 				int y = j * RECT_SIZE + SCREEN_RIGHT_OFFSET;
@@ -93,12 +93,12 @@ bool Game::checkIfMovePossible()
 	{
 		for (int j = GAME_FIELD_WIDTH - 1; j >= 0; --j)
 		{
-			if (abs(_cells[i][j].value) == abs(MOVABLE_CELL))
+			if (_cells[i][j].value == MOVABLE_CELL)
 			{
 				// still possible to move down
 				if (i + 1 <= GAME_FIELD_HEIGHT)
 				{
-					if (abs(_cells[i + 1][j].value) == abs(STATIC_CELL))
+					if (_cells[i + 1][j].value == STATIC_CELL)
 					{
 						return false;
 					}
@@ -121,7 +121,7 @@ void Game::movableToStatic()
 	{
 		for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
 		{
-			if (abs(_cells[i][j].value) == abs(MOVABLE_CELL))
+			if (_cells[i][j].value == MOVABLE_CELL)
 			{
 				_cells[i][j].value = STATIC_CELL;
 			}
