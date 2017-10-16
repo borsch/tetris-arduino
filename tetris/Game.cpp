@@ -82,7 +82,7 @@ void Game::draw()
 {
 	_display.clrScr();
   
-	_display.drawRect(SCREEN_TOP_OFFSET, SCREEN_RIGHT_OFFSET + 1, 127, 63);
+	_display.drawRect(SCREEN_TOP_OFFSET, SCREEN_RIGHT_OFFSET - 1, 126, 63);
 
 	for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
 	{
@@ -94,7 +94,10 @@ void Game::draw()
 				int y = j * RECT_SIZE + SCREEN_RIGHT_OFFSET;
 
 				_display.drawRect(x, y, x + RECT_SIZE, y + RECT_SIZE);
-				_display.setPixel(x + DOT_OFFSET, y + DOT_OFFSET);
+				_display.setPixel(x + 2, y + 2);
+				_display.setPixel(x + 2, y + 3);
+				_display.setPixel(x + 3, y + 2);
+				_display.setPixel(x + 3, y + 3);
 			}
 		}
 	}

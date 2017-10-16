@@ -4,12 +4,11 @@
 #include <OLED_I2C.h>
 
 #define RECT_SIZE 5
-#define DOT_OFFSET 2
 
 #define GAME_FIELD_HEIGHT 20
 #define GAME_FIELD_WIDTH 9
-#define SCREEN_RIGHT_OFFSET 15
-#define SCREEN_TOP_OFFSET 28
+#define SCREEN_RIGHT_OFFSET 17
+#define SCREEN_TOP_OFFSET 25
 
 // cells that contains shape that are moving at this very momment
 #define MOVABLE_CELL 2
