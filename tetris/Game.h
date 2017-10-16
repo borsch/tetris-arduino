@@ -7,7 +7,7 @@
 #define DOT_OFFSET 2
 
 #define GAME_FIELD_HEIGHT 20
-#define GAME_FIELD_WIDTH 10
+#define GAME_FIELD_WIDTH 9
 #define SCREEN_RIGHT_OFFSET 15
 #define SCREEN_TOP_OFFSET 28
 
@@ -36,9 +36,11 @@ private:
 	void generateShape();
 
 	/*
-		check if current movable shape can move one more cell down
+		check if current movable shape can move one more cell down/left/right
 	*/
 	bool checkIfMovePossible();
+	bool checkIfMoveLeftPossible();
+	bool checkifMoveRightPossible();
 
 	/*
 		conver all cell marked as movable to be a static cell

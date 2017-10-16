@@ -44,12 +44,38 @@ void Game::update()
 
 void Game::shapeToLeft()
 {
-
+	if (checkIfMoveLeftPossible())
+	{
+		for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
+		{
+			for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
+			{
+				if (_cells[i][j].value == MOVABLE_CELL)
+				{
+					_cells[i][j].value = EMPLTY_CELL;
+					_cells[i][j - 1].value = MOVABLE_CELL;
+				}
+			}
+		}
+	}
 }
 
 void Game::shapeToRight()
 {
-
+	if (checkifMoveRightPossible())
+	{
+		for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
+		{
+			for (int j = GAME_FIELD_WIDTH - 1; j >= 0; --j)
+			{
+				if (_cells[i][j].value == MOVABLE_CELL)
+				{
+					_cells[i][j].value = EMPLTY_CELL;
+					_cells[i][j + 1].value = MOVABLE_CELL;
+				}
+			}
+		}
+	}
 }
 
 void Game::draw()
@@ -96,7 +122,7 @@ bool Game::checkIfMovePossible()
 			if (_cells[i][j].value == MOVABLE_CELL)
 			{
 				// still possible to move down
-				if (i + 1 <= GAME_FIELD_HEIGHT)
+				if (i + 1 < GAME_FIELD_HEIGHT)
 				{
 					if (_cells[i + 1][j].value == STATIC_CELL)
 					{
@@ -106,6 +132,62 @@ bool Game::checkIfMovePossible()
 				else
 				{
 					// impossible to move one more cell down
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+bool Game::checkIfMoveLeftPossible()
+{
+	for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
+	{
+		for (int j = 0; j < GAME_FIELD_WIDTH; ++j)
+		{
+			if (_cells[i][j].value == MOVABLE_CELL)
+			{
+				// still possible to move left
+				if (j > 0)
+				{
+					if (_cells[i][j - 1].value == STATIC_CELL)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					// impossible to move one more cell left
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+bool Game::checkifMoveRightPossible()
+{
+	for (int i = 0; i < GAME_FIELD_HEIGHT; ++i)
+	{
+		for (int j = GAME_FIELD_WIDTH - 1; j >= 0; --j)
+		{
+			if (_cells[i][j].value == MOVABLE_CELL)
+			{
+				// still possible to move right
+				if (j + 1 < GAME_FIELD_WIDTH)
+				{
+					if (_cells[i][j + 1].value == STATIC_CELL)
+					{
+						return false;
+					}
+				}
+				else
+				{
+					// impossible to move one more cell right
 					return false;
 				}
 			}
