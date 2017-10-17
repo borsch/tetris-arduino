@@ -26,6 +26,7 @@ struct Cell
 class Game
 {
 private:
+	uint _score;
 	OLED _display;
 	Cell _cells[GAME_FIELD_HEIGHT][GAME_FIELD_WIDTH];
 

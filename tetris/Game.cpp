@@ -1,5 +1,7 @@
 #include "Game.h"
 
+extern uint8_t SmallFont[];
+
 Game::Game()
 	: _display(SDA, SCL)
 {
@@ -17,6 +19,7 @@ Game::Game()
 void Game::setup()
 {
   _display.begin();
+  _display.setFont(SmallFont);
 }
 
 void Game::update()
@@ -103,6 +106,8 @@ void Game::draw()
 			}
 		}
 	}
+
+	_display.print("Score: " + String(_score), CENTER, 2);
 
 	_display.update();
 }
@@ -239,6 +244,8 @@ void Game::checkFilledRow()
 				draw();
 				delay(50);
 			}
+
+			++_score;
 
 			moveStaticBricksDown = true;
 		}
